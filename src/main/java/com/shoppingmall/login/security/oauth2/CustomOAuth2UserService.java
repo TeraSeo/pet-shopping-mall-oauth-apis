@@ -41,16 +41,22 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuthAttributes oAuthAttributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        Optional<User> user = userRepository.findByEmail(oAuthAttributes.getEmail());
-        if (user.isEmpty()) {
-            user = Optional.of(userRepository.save(oAuthAttributes.toEntity()));
-        }
+        LOGGER.debug("name: " + oAuthAttributes.getName());
+        User user = saveOrUpdate(oAuthAttributes);
 
         LOGGER.debug("user loading succeeded");
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(user.get().getRole().toString())),
+                Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString())),
                 oAuthAttributes.getAttributes(),
                 oAuthAttributes.getNameAttributeKey()
         );
+    }
+
+    private User saveOrUpdate(OAuthAttributes attributes) {
+        User user = userRepository.findByEmail(attributes.getEmail())
+                .map(User::updateModifiedDate)
+                .orElse(attributes.toEntity());
+
+        return userRepository.save(user);
     }
 }

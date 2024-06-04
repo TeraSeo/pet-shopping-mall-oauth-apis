@@ -22,4 +22,10 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private boolean isVerified;
+
+    public User updateModifiedDate() {
+        this.onPreUpdate();
+        return this;
+    }
 }

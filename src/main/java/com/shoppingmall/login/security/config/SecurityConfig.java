@@ -1,8 +1,6 @@
 package com.shoppingmall.login.security.config;
 
 import com.shoppingmall.login.repository.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.shoppingmall.login.security.filter.JwtAuthenticationFilter;
-import com.shoppingmall.login.security.jwt.JwtTokenProvider;
 import com.shoppingmall.login.security.oauth2.CustomOAuth2UserService;
 import com.shoppingmall.login.security.oauth2.handler.OAuth2FailureHandler;
 import com.shoppingmall.login.security.oauth2.handler.OAuth2SuccessHandler;
@@ -15,7 +13,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -24,14 +21,12 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final OAuth2FailureHandler oAuth2FailureHandler;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, OAuth2SuccessHandler oAuth2SuccessHandler, OAuth2FailureHandler oAuth2FailureHandler, JwtTokenProvider jwtTokenProvider) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, OAuth2SuccessHandler oAuth2SuccessHandler, OAuth2FailureHandler oAuth2FailureHandler) {
         this.customOAuth2UserService = customOAuth2UserService;
         this.oAuth2SuccessHandler = oAuth2SuccessHandler;
         this.oAuth2FailureHandler = oAuth2FailureHandler;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Bean

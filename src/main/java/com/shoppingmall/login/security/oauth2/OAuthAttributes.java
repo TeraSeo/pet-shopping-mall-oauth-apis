@@ -64,6 +64,7 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .role(Role.USER)
+                .isVerified(true)
                 .build();
     }
 

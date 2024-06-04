@@ -77,8 +77,8 @@ public class JwtTokenProvider {
         return refreshToken;
     }
 
-    public Authentication getAuthentication(String accessToken) {
-        Claims claims = parseClaims(accessToken);
+    public Authentication getAuthentication(String token) {
+        Claims claims = parseClaims(token);
 
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보 없는 토큰 입니다.");
