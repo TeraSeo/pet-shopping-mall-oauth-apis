@@ -25,16 +25,16 @@ public class OAuthController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @GetMapping("/get/authority")
-    public ResponseEntity<List<String>> getAuthorities(@RequestHeader String refreshToken) {
-        Authentication authentication = jwtTokenProvider.getAuthentication(refreshToken);
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        ArrayList<String> auths = new ArrayList<>();
-        authorities.forEach(grantedAuthority -> {
-            LOGGER.debug(grantedAuthority.toString());
-            auths.add(grantedAuthority.toString());
-        });
-        return ResponseEntity.ok(auths);
-    }
+//    @GetMapping("/get/authority")
+//    public ResponseEntity<List<String>> getAuthorities(@RequestHeader String refreshToken) {
+//        Authentication authentication = jwtTokenProvider.getAuthentication(refreshToken);
+//        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+//        ArrayList<String> auths = new ArrayList<>();
+//        authorities.forEach(grantedAuthority -> {
+//            LOGGER.debug(grantedAuthority.toString());
+//            auths.add(grantedAuthority.toString());
+//        });
+//        return ResponseEntity.ok(auths);
+//    }
 
 }

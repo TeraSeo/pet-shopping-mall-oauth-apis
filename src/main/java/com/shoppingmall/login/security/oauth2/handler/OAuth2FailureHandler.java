@@ -1,6 +1,5 @@
 package com.shoppingmall.login.security.oauth2.handler;
 
-import com.shoppingmall.login.security.oauth2.CustomOAuth2UserService;
 import com.shoppingmall.login.security.cookie.CookieUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -20,7 +19,7 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 
     private final String REDIRECT_URI_PARAM_COOKIE_NAME = "redirect_uri";
     private final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomOAuth2UserService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OAuth2FailureHandler.class);
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
