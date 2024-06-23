@@ -7,30 +7,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
-@Data
+@Table(name = "product")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity {
+@Getter
+@Setter
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
-    private String password;
-
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(nullable = false)
+    private Category category;
 
-    private Boolean isVerified;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<ProductDetail> productDetails;
 
-    public User updateModifiedDate() {
-        this.onPreUpdate();
-        return this;
+    public void add(ProductDetail productDetail) {
+        productDetail.setProduct(this);
+        getProductDetails().add(productDetail);
     }
+
 }
